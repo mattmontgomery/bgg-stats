@@ -7,37 +7,51 @@ import sagas from "./Sagas/index";
 
 const sagaMiddleware = createSagaMiddleware();
 const LOCAL_STORAGE_GAMES_KEY = "games";
-
-let gamesFromLocalStorage = [];
+const LOCAL_STORAGE_EXPANSIONS_KEY = "expansions";
 
 function localStorageMiddleware(store) {
   return next => action => {
     // console.log(action);
     const result = next(action);
-    if (action.type === "FETCH_COLLECTION_DONE") {
-      localStorage.setItem(
-        LOCAL_STORAGE_GAMES_KEY,
-        JSON.stringify(parseItems(result.payload.items.item))
-      );
+    switch (action.type) {
+      case "FETCH_COLLECTION_DONE":
+        localStorage.setItem(
+          LOCAL_STORAGE_GAMES_KEY,
+          JSON.stringify(parseItems(result.payload.items.item))
+        );
+        return result;
+      case "FETCH_EXPANSIONS_DONE":
+        localStorage.setItem(
+          LOCAL_STORAGE_EXPANSIONS_KEY,
+          JSON.stringify(parseItems(result.payload.items.item))
+        );
+        return result;
+      default:
+        return result;
     }
-    return result;
   };
 }
 
 const store = createStore(
   rootReducer,
-  {
-    games: gamesFromLocalStorage
-  },
   applyMiddleware(localStorageMiddleware, sagaMiddleware)
 );
 if (window && window.localStorage) {
-  gamesFromLocalStorage = localStorage.getItem(LOCAL_STORAGE_GAMES_KEY)
+  const gamesFromLocalStorage = localStorage.getItem(LOCAL_STORAGE_GAMES_KEY)
     ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_GAMES_KEY))
     : [];
   store.dispatch({
     type: "FETCH_COLLECTION_LS",
     payload: gamesFromLocalStorage
+  });
+  const expansionsFromLocalStorage = localStorage.getItem(
+    LOCAL_STORAGE_EXPANSIONS_KEY
+  )
+    ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_EXPANSIONS_KEY))
+    : [];
+  store.dispatch({
+    type: "FETCH_EXPANSIONS_LS",
+    payload: expansionsFromLocalStorage
   });
 }
 
