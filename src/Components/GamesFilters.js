@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
+import { connect } from "react-redux";
 
-export default class GamesControls extends PureComponent {
+export class GamesFilters extends PureComponent {
   state = {
     numPlayersMin: null,
     numPlayersMax: null,
@@ -31,7 +32,10 @@ export default class GamesControls extends PureComponent {
         return acc;
       }, {})
     });
-    this.ref.querySelectorAll("input").forEach(e => (e.value = ""));
+    this.ref.querySelectorAll("input").forEach(e => {
+      e.value = "";
+      e.checked = "";
+    });
     this.props.onFilter(i => true);
   };
   filterRanges = () => {
@@ -75,6 +79,9 @@ export default class GamesControls extends PureComponent {
       this.filterRanges
     );
   };
+  setNamedFilter = (field, value) => {
+    this.props.onToggleFilter(field, value);
+  };
   render() {
     return (
       <div className="Controls Filters" ref={e => (this.ref = e)}>
@@ -82,11 +89,13 @@ export default class GamesControls extends PureComponent {
         <div>
           <label>{"Year"}</label>
           <input
+            id="yearMin"
             onChange={ev => this.setRangeFilter("yearMin", ev.target.value)}
             type="number"
           />
           {" — "}
           <input
+            id="yearMax"
             onChange={ev => this.setRangeFilter("yearMax", ev.target.value)}
             type="number"
           />
@@ -131,7 +140,21 @@ export default class GamesControls extends PureComponent {
             type="number"
           />
         </div>
+        <div>
+          <label>{"Hide expansions"}</label>
+          <input
+            defaultChecked={this.props.hideExpansions}
+            onChange={ev =>
+              this.setNamedFilter({ hideExpansions: !!ev.target.checked })
+            }
+            type="checkbox"
+          />
+        </div>
       </div>
     );
   }
 }
+
+export default connect(({ filters }) => ({
+  ...filters
+}))(GamesFilters);

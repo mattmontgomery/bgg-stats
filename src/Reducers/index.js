@@ -52,10 +52,15 @@ function filter(state = items => items, { type, payload }) {
       return state;
   }
 }
-function filters(state = [], { type, payload }) {
+function filters(
+  state = {
+    hideExpansions: true
+  },
+  { type, payload }
+) {
   switch (type) {
-    case "FILTER_ADD":
-      return payload;
+    case "TOGGLE_FILTER":
+      return { ...state, ...payload };
     case "FILTER_RESET":
       return [];
     default:
