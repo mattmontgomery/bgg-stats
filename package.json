@@ -3,7 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/jest": "^23.3.12",
+    "@types/node": "^10.12.18",
+    "@types/react": "^16.7.18",
+    "@types/react-dom": "^16.0.11",
+    "@types/react-redux": "^6.0.12",
+    "@types/redux": "^3.6.0",
+    "awesome-typescript-loader": "^5.2.1",
     "node-sass": "^4.11.0",
+    "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",
@@ -12,6 +20,8 @@
     "react-scripts": "2.1.1",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.2.2",
     "x2js": "^3.2.3"
   },
   "scripts": {

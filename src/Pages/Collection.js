@@ -8,7 +8,8 @@ import Game, {
   GameInfo,
   GameInfoSection,
   GameTitle,
-  GameImage
+  GameImage,
+  GameYear
 } from "../Components/Game";
 
 const fetch = () => ({
@@ -55,6 +56,18 @@ class Collection extends PureComponent {
             <GameTitle />
             <GameInfoSection>
               <GameInfo
+                field="stats"
+                label="Rating"
+                render={({
+                  value: {
+                    rating: { average, bayesaverage }
+                  }
+                }) =>
+                  typeof average === "number" ? average.toFixed(3) : average
+                }
+              />
+              <hr />
+              <GameInfo
                 field="numplays"
                 label="Plays"
                 render={({ value }) => value}
@@ -74,6 +87,7 @@ class Collection extends PureComponent {
                 }
               />
             </GameInfoSection>
+            <GameYear />
           </Game>
         ))}
       </GamesList>
@@ -121,6 +135,7 @@ class Wishlist extends Collection {
                 }
               />
             </GameInfoSection>
+            <GameYear />
           </Game>
         ))}
       </GamesList>
@@ -145,6 +160,17 @@ const ConnectedCollection = connect(
   dispatchFn
 )(Collection);
 
+const ConnectedShelfOfShame = connect(
+  ({ games, expansions, sort, filter, filters: { hideExpansions } }) => ({
+    games: sort(
+      sortState(games, expansions, hideExpansions).filter(g => !!g.status._own)
+    )
+      .filter(filter)
+      .filter(({ numplays }) => numplays === 0)
+  }),
+  dispatchFn
+)(Collection);
+
 const ConnectedWishlist = connect(
   ({ games, expansions, sort, filter, filters: { hideExpansions } }) => ({
     games: sort(
@@ -162,3 +188,4 @@ const ConnectedWishlist = connect(
 
 export { ConnectedWishlist as Wishlist };
 export { ConnectedCollection as Collection };
+export { ConnectedShelfOfShame as ShelfOfShame };

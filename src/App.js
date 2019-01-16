@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
-import { Collection, Wishlist } from "./Pages/Collection";
+import { Collection, Wishlist, ShelfOfShame } from "./Pages/Collection";
 import "./App.scss";
 
 export default class App extends PureComponent {
@@ -16,9 +16,13 @@ export default class App extends PureComponent {
             <NavLink activeClassName="selected" exact to="/wishlist">
               {"Wishlist"}
             </NavLink>
+            <NavLink activeClassName="selected" exact to="/shelf-of-shame">
+              {"Shelf of Shame"}
+            </NavLink>
           </nav>
           <Route path="/" exact component={Collection} />
           <Route path="/wishlist" exact component={Wishlist} />
+          <Route path="/shelf-of-shame" exact component={ShelfOfShame} />
         </div>
       </Router>
     );

@@ -2,6 +2,7 @@ $background-color: RGBA(0, 0, 0, 0.125);
 $background-color-dark: RGBA(0, 0, 0, 0.25);
 $background-color-darker: RGBA(0, 0, 0, 0.625);
 $primary-color: #9555af;
+$primary-accent-color: lighten($primary-color, 30%);
 $secondary-color: #6faf55;
 
 a {
@@ -78,6 +79,12 @@ a {
   &__info {
     grid-area: info;
     padding-right: 0.5rem;
+    hr {
+      border: 0;
+      border-color: $primary-accent-color;
+      border-bottom-width: 1px;
+      border-style: solid;
+    }
   }
   &__info-detail {
     display: grid;
