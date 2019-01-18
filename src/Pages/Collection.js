@@ -122,6 +122,18 @@ class Wishlist extends Collection {
             <GameInfoSection>
               <GameInfo
                 field="stats"
+                label="Rating"
+                render={({
+                  value: {
+                    rating: { average, bayesaverage }
+                  }
+                }) =>
+                  typeof average === "number" ? average.toFixed(3) : average
+                }
+              />
+              <hr />
+              <GameInfo
+                field="stats"
                 label="Play Time"
                 render={({ value: { _minplaytime: min, _maxplaytime: max } }) =>
                   min !== max && max ? `${min}–${max}` : min
