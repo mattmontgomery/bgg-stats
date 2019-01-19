@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react";
 
-const standardSort = function(
+const standardSort = (
   items: Array<{
     [key: string]: string;
   }>,
   field: string
-) {
+) => {
   return items.sort((a, b) => {
     if (a[field] > b[field]) {
       return -1;
@@ -17,22 +17,22 @@ const standardSort = function(
   });
 };
 
-export interface ControlsProps {
-  onSort: Function;
+export interface IControlsProps {
+  onSort: (i: {}) => void;
 }
 
-export default class GamesControls extends PureComponent<ControlsProps> {
-  constructor(props: ControlsProps) {
+export default class GamesControls extends PureComponent<IControlsProps> {
+  constructor(props: IControlsProps) {
     super(props);
   }
-  sortByPlays = () =>
+  public sortByPlays = () =>
     this.props.onSort((i: Array<{}>) => standardSort(i, "numplays"));
-  sortByYear = () =>
+  public sortByYear = () =>
     this.props.onSort((i: Array<{}>) => standardSort(i, "yearpublished"));
-  reverseSort = () => this.props.onSort((i: Array<{}>) => i.reverse());
-  standardSort = () =>
+  public reverseSort = () => this.props.onSort((i: Array<{}>) => i.reverse());
+  public standardSort = () =>
     this.props.onSort((i: Array<{}>) => standardSort(i, "name"));
-  randomSort = () =>
+  public randomSort = () =>
     this.props.onSort((i: Array<{}>) =>
       i.sort((a, b) => {
         const rand = Math.random();
@@ -45,7 +45,7 @@ export default class GamesControls extends PureComponent<ControlsProps> {
         return 0;
       })
     );
-  render() {
+  public render() {
     return (
       <div className="Controls">
         <button onClick={this.standardSort}>{"A-Z"}</button>

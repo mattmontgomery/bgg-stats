@@ -15,7 +15,12 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+    "lib": [
+      "dom",
+      "es2015",
+      "es2015.iterable"
+    ]
   },
   "include": [
     "./src/**/*"

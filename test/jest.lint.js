@@ -4,9 +4,9 @@ const { rootDir } = require("./jest.common");
 
 module.exports = {
   rootDir,
-  displayName: "lint",
+  displayName: "eslint",
   runner: "jest-runner-eslint",
-  testMatch: ["<rootDir>/src/**/*.{js,jsx}"],
+  testMatch: ["<rootDir>/src/**/*.{js,jsx,ts,tsx}"],
   testPathIgnorePatterns: [
     "/node_modules/",
     "/coverage/",

@@ -5,22 +5,22 @@ function defaultSort(a: { name: string }, b: { name: string }): number {
   return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
 }
 
-export interface Action {
+export interface IAction {
   type: string;
   payload: any;
 }
 
-export interface RawState {
+export interface IRawState {
   base?: {};
   exp?: {};
 }
 
-export interface Game {
-  _objectid: Number;
+export interface IGame {
+  _objectid: number;
   name: string;
 }
 
-function raw(state: RawState = {}, { type, payload }: Action): RawState {
+function raw(state: IRawState = {}, { type, payload }: IAction): IRawState {
   switch (type) {
     case "FETCH_COLLECTION_DONE":
       return { base: payload };
@@ -32,9 +32,9 @@ function raw(state: RawState = {}, { type, payload }: Action): RawState {
 }
 
 function games(
-  state: Array<Game> = [],
-  { type, payload }: Action
-): Array<Game> {
+  state: IGame[] = [],
+  { type, payload }: IAction
+): IGame[] {
   switch (type) {
     case "FETCH_COLLECTION_DONE":
       return parseItems(payload.items.item);
@@ -45,9 +45,9 @@ function games(
   }
 }
 function expansions(
-  state: Array<Game> = [],
-  { type, payload }: Action
-): Array<Game> {
+  state: IGame[] = [],
+  { type, payload }: IAction
+): IGame[] {
   switch (type) {
     case "FETCH_EXPANSIONS_DONE":
       return parseItems(payload.items.item);
@@ -61,7 +61,7 @@ function expansions(
 function sort(
   state: (items: Array<{ name: string }>) => Array<{ name: string }> = items =>
     items.sort(defaultSort),
-  { type, payload }: Action
+  { type, payload }: IAction
 ) {
   switch (type) {
     case "SORT_COLLECTION":
@@ -72,7 +72,7 @@ function sort(
 }
 function filter(
   state: (items: Array<{}>) => Array<{}> = items => items,
-  { type, payload }: Action
+  { type, payload }: IAction
 ) {
   switch (type) {
     case "FILTER_COLLECTION":
@@ -85,7 +85,7 @@ function filters(
   state = {
     hideExpansions: true
   },
-  { type, payload }: Action
+  { type, payload }: IAction
 ) {
   switch (type) {
     case "TOGGLE_FILTER":
@@ -98,10 +98,10 @@ function filters(
 }
 
 export default combineReducers({
-  games,
   expansions,
+  filter,
+  filters,
+  games,
   raw,
   sort,
-  filter,
-  filters
 });

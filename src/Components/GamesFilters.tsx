@@ -1,51 +1,51 @@
-import React, { PureComponent, createRef } from "react";
-import { IGame } from "../Interfaces/Game";
+import React, { createRef, PureComponent } from "react";
+import { IGame } from "../Interfaces";
 
 import { connect } from "react-redux";
 
-export interface GamesFilters {
+export interface IGamesFilters {
   hideExpansions: boolean;
   onFilter: (item: {}) => boolean;
   onToggleFilter: (field: string, value: boolean) => void;
 }
 
-export interface GamesFiltersState {
-  numPlayersMin?: Number;
-  numPlayersMax?: Number;
-  yearMin?: Number;
-  yearMax?: Number;
-  timeMin?: Number;
-  timeMax?: Number;
-  playsMin?: Number;
-  playsMax?: Number;
+export interface IGamesFiltersState {
+  numPlayersMin?: number;
+  numPlayersMax?: number;
+  yearMin?: number;
+  yearMax?: number;
+  timeMin?: number;
+  timeMax?: number;
+  playsMin?: number;
+  playsMax?: number;
 }
 
-export class GamesFilters extends PureComponent<GamesFilters> {
-  private ref? = createRef<HTMLDivElement>();
-  state: GamesFiltersState = {
-    numPlayersMin: undefined,
+export class GamesFilters extends PureComponent<IGamesFilters> {
+  public state: IGamesFiltersState = {
     numPlayersMax: undefined,
-    yearMin: undefined,
-    yearMax: undefined,
-    timeMin: undefined,
-    timeMax: undefined,
+    numPlayersMin: undefined,
+    playsMax: undefined,
     playsMin: undefined,
-    playsMax: undefined
+    timeMax: undefined,
+    timeMin: undefined,
+    yearMax: undefined,
+    yearMin: undefined,
   };
-  constructor(props: GamesFilters) {
+  private ref? = createRef<HTMLDivElement>();
+  constructor(props: IGamesFilters) {
     super(props);
     this.state = {
-      numPlayersMin: undefined,
       numPlayersMax: undefined,
-      yearMin: undefined,
-      yearMax: undefined,
-      timeMin: undefined,
-      timeMax: undefined,
+      numPlayersMin: undefined,
+      playsMax: undefined,
       playsMin: undefined,
-      playsMax: undefined
+      timeMax: undefined,
+      timeMin: undefined,
+      yearMax: undefined,
+      yearMin: undefined,
     };
   }
-  filterReset = () => {
+  public filterReset = () => {
     this.setState({
       ...Object.keys(this.state).reduce(
         (acc: { [key: string]: string | null }, key) => {
@@ -64,7 +64,7 @@ export class GamesFilters extends PureComponent<GamesFilters> {
         : [];
     this.props.onFilter((i: IGame) => true);
   };
-  filterRanges = () => {
+  public filterRanges = () => {
     const {
       numPlayersMin,
       numPlayersMax,
@@ -97,18 +97,29 @@ export class GamesFilters extends PureComponent<GamesFilters> {
       );
     });
   };
-  setRangeFilter = (field: string, value: string) => {
+  public setRangeFilter = (field: string, value: string) => {
     this.setState(
       {
-        [field]: value !== "" ? parseInt(value) : undefined
+        [field]: value !== "" ? parseInt(value, 0) : undefined
       },
       this.filterRanges
     );
   };
-  setNamedFilter = (field: string, value: boolean) => {
+  public setNamedFilter = (field: string, value: boolean) => {
     this.props.onToggleFilter(field, value);
   };
-  render() {
+  public setRangeFilterYearMin = (ev: React.FormEvent<HTMLInputElement>) => this.setRangeFilter("yearMin", ev.currentTarget.value)
+  public setRangeFilterYearMax = (ev: React.FormEvent<HTMLInputElement>) => this.setRangeFilter("yearMax", ev.currentTarget.value)
+  public setNumPlayersMin = (ev: React.FormEvent<HTMLInputElement>) => this.setRangeFilter("numPlayersMin", ev.currentTarget.value)
+  public setNumPlayersMax = (ev: React.FormEvent<HTMLInputElement>) => this.setRangeFilter("numPlayersMax", ev.currentTarget.value)
+  public setTimeMin = (ev: React.FormEvent<HTMLInputElement>) => this.setRangeFilter("timeMin", ev.currentTarget.value)
+  public setTimeMax = (ev: React.FormEvent<HTMLInputElement>) => this.setRangeFilter("timeMax", ev.currentTarget.value)
+  public setPlaysMin = (ev: React.FormEvent<HTMLInputElement>) => this.setRangeFilter("playsMin", ev.currentTarget.value)
+  public setPlaysMax = (ev: React.FormEvent<HTMLInputElement>) => this.setRangeFilter("playsMax", ev.currentTarget.value)
+  public toggleExpansions = (ev: React.FormEvent<HTMLInputElement>) =>
+    this.setNamedFilter("hideExpansions", !!ev.currentTarget.checked)
+
+  public render() {
     return (
       <div className="Controls Filters" ref={this.ref}>
         <button onClick={this.filterReset}>{"Reset"}</button>
@@ -116,53 +127,49 @@ export class GamesFilters extends PureComponent<GamesFilters> {
           <label>{"Year"}</label>
           <input
             id="yearMin"
-            onChange={ev => this.setRangeFilter("yearMin", ev.target.value)}
+            onChange={this.setRangeFilterYearMin}
             type="number"
           />
           {" — "}
           <input
             id="yearMax"
-            onChange={ev => this.setRangeFilter("yearMax", ev.target.value)}
+            onChange={this.setRangeFilterYearMax}
             type="number"
           />
         </div>
         <div>
           <label>{"Player Count"}</label>
           <input
-            onChange={ev =>
-              this.setRangeFilter("numPlayersMin", ev.target.value)
-            }
+            onChange={this.setNumPlayersMin}
             type="number"
           />
           {" — "}
           <input
-            onChange={ev =>
-              this.setRangeFilter("numPlayersMax", ev.target.value)
-            }
+            onChange={this.setNumPlayersMax}
             type="number"
           />
         </div>
         <div>
           <label>{"Play Time"}</label>
           <input
-            onChange={ev => this.setRangeFilter("timeMin", ev.target.value)}
+            onChange={this.setTimeMin}
             type="number"
           />
           {" — "}
           <input
-            onChange={ev => this.setRangeFilter("timeMax", ev.target.value)}
+            onChange={this.setTimeMax}
             type="number"
           />
         </div>
         <div>
           <label>{"Plays"}</label>
           <input
-            onChange={ev => this.setRangeFilter("playsMin", ev.target.value)}
+            onChange={this.setPlaysMin}
             type="number"
           />
           {" — "}
           <input
-            onChange={ev => this.setRangeFilter("playsMax", ev.target.value)}
+            onChange={this.setPlaysMax}
             type="number"
           />
         </div>
@@ -170,9 +177,7 @@ export class GamesFilters extends PureComponent<GamesFilters> {
           <label>{"Hide expansions"}</label>
           <input
             defaultChecked={this.props.hideExpansions}
-            onChange={ev =>
-              this.setNamedFilter("hideExpansions", !!ev.target.checked)
-            }
+            onChange={this.toggleExpansions}
             type="checkbox"
           />
         </div>

@@ -1,6 +1,12 @@
 {
   "root": true,
-  "extends": ["eslint:recommended", "prettier", "prettier/react"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest/globals": true
+  },
+  "plugins": ["react", "babel", "jest"],
+  "extends": ["prettier", "prettier/react"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 6,
@@ -9,13 +15,9 @@
       "jsx": true
     }
   },
-  "rules": {
-    "react/react-in-jsx-scope": 2
-  },
   "settings": {
     "react": {
       "version": "detect"
     }
-  },
-  "plugins": ["react", "babel", "jest"]
+  }
 }

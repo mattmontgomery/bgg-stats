@@ -1,4 +1,4 @@
-export interface IGame {
+export default interface IGame {
   children?: React.ReactNode;
   _objectid: number;
   id: number;
@@ -18,5 +18,3 @@ export interface IGame {
     };
   };
 }
-
-export default {};

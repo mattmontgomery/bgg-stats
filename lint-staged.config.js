@@ -1,5 +1,5 @@
 module.exports = {
   linters: {
-    "**/*.js": "eslint"
+    "**/*.js": "lint"
   }
 };

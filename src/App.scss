@@ -13,11 +13,12 @@ a {
   margin: 1rem;
   display: flex;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   padding: 1rem;
   background: $background-color-darker;
   a {
     color: lighten($primary-color, 40);
+    text-align: center;
     &.selected {
       font-weight: bold;
     }
