@@ -1,13 +1,10 @@
 import { combineReducers } from "redux";
+import { IAction } from "../Interfaces";
 import parseItems from "../utils/parseItems";
+import drawer from "./drawer";
 
 function defaultSort(a: { name: string }, b: { name: string }): number {
   return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
-}
-
-export interface IAction {
-  type: string;
-  payload: any;
 }
 
 export interface IRawState {
@@ -31,10 +28,7 @@ function raw(state: IRawState = {}, { type, payload }: IAction): IRawState {
   }
 }
 
-function games(
-  state: IGame[] = [],
-  { type, payload }: IAction
-): IGame[] {
+function games(state: IGame[] = [], { type, payload }: IAction): IGame[] {
   switch (type) {
     case "FETCH_COLLECTION_DONE":
       return parseItems(payload.items.item);
@@ -44,10 +38,7 @@ function games(
       return state;
   }
 }
-function expansions(
-  state: IGame[] = [],
-  { type, payload }: IAction
-): IGame[] {
+function expansions(state: IGame[] = [], { type, payload }: IAction): IGame[] {
   switch (type) {
     case "FETCH_EXPANSIONS_DONE":
       return parseItems(payload.items.item);
@@ -98,10 +89,11 @@ function filters(
 }
 
 export default combineReducers({
+  drawer,
   expansions,
   filter,
   filters,
   games,
   raw,
-  sort,
+  sort
 });

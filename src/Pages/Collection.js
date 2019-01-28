@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { addGame } from "../Reducers/drawer";
 import GamesList from "../Components/GamesList";
 import GamesControls from "../Components/GamesControls";
 import GamesFilters from "../Components/GamesFilters";
@@ -23,16 +24,17 @@ const sort = sortFn => ({
 });
 const filter = filterFn => ({
   type: "FILTER_COLLECTION",
-  payload: filterFn
+  payload
 });
 const toggleFilter = payload => ({
   type: "TOGGLE_FILTER",
-  payload: payload
+  payload
 });
 
 const dispatchFn = dispatch => ({
   fetch: bindActionCreators(fetch, dispatch),
   filter: bindActionCreators(filter, dispatch),
+  selectGame: bindActionCreators(addGame, dispatch),
   toggleFilter: bindActionCreators(toggleFilter, dispatch),
   sort: bindActionCreators(sort, dispatch)
 });
@@ -53,7 +55,11 @@ class Collection extends PureComponent {
             {...game}
           >
             <GameImage />
-            <GameTitle />
+            <GameTitle>
+              <button className="button--small" onClick={this.props.selectGame}>
+                +
+              </button>
+            </GameTitle>
             <GameInfoSection>
               <GameInfo
                 field="stats"

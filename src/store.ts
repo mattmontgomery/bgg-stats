@@ -1,9 +1,18 @@
 /* eslint-env browser */
 
-import { Action, applyMiddleware, compose, createStore, Dispatch, Middleware, MiddlewareAPI } from "redux";
-import { persistReducer, persistStore } from 'redux-persist'
+import {
+  Action,
+  applyMiddleware,
+  compose,
+  createStore,
+  Dispatch,
+  Middleware,
+  MiddlewareAPI
+} from "redux";
+import { createLogger } from "redux-logger";
+import { persistReducer, persistStore } from "redux-persist";
 // tslint:disable:no-submodule-imports
-import storage from 'redux-persist/lib/storage'
+import storage from "redux-persist/lib/storage";
 // tslint:enable:no-submodule-imports
 import createSagaMiddleware from "redux-saga";
 import rootReducer from "./Reducers/index";
@@ -11,36 +20,36 @@ import parseItems from "./utils/parseItems";
 
 import sagas from "./Sagas/index";
 
-
 const sagaMiddleware = createSagaMiddleware();
 const LOCAL_STORAGE_GAMES_KEY = "games";
 const LOCAL_STORAGE_EXPANSIONS_KEY = "expansions";
 
 const persistConfig = {
-  key: 'root',
-  storage,
-}
+  key: "root",
+  storage
+};
 
 declare global {
-   // tslint:disable-next-line
-  interface Window { Store: any; }
-}
-
-interface IAction {
-  payload: {};
-  type: string;
+  // tslint:disable-next-line
+  interface Window {
+    Store: any;
+  }
 }
 
 interface IResult {
   payload: {
     items: {
-      item: []
-    }
-  }
+      item: [];
+    };
+  };
 }
 
+const logger = createLogger({});
+
 export default () => {
-  const createStoreWithMiddleware = applyMiddleware(sagaMiddleware)(createStore);
+  const createStoreWithMiddleware = applyMiddleware(sagaMiddleware, logger)(
+    createStore
+  );
   const store = createStoreWithMiddleware(
     persistReducer(persistConfig, rootReducer)
   );

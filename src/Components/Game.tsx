@@ -16,26 +16,24 @@ export interface IGameInfoProps {
 export default class Game extends PureComponent<IGame> {
   public renderChild = (child: React.ReactNode): React.ReactNode => {
     if (React.isValidElement(child)) {
-      const type: string | undefined =
-        typeof child.type === "function" ? child.type.displayName : child.type;
       return React.cloneElement(child as React.ReactElement<any>, {
         name: this.props.name,
         ...(() => {
-          switch (type) {
-            case "GameInfoSection":
+          switch (child.type) {
+            case GameInfoSection:
               return this.props;
-            case "GameYear":
+            case GameYear:
               return { yearpublished: this.props.yearpublished };
-            case "GameTitle":
+            case GameTitle:
               return {
                 id: this.props._objectid,
-                name: this.props.name,
+                name: this.props.name
               };
-            case "GameInfo":
+            case GameInfo:
               return {
                 value: (this.props as any)[(child.props as any).field]
               };
-            case "GameImage":
+            case GameImage:
               return { thumbnail: this.props.thumbnail };
             default:
               return null;
@@ -54,4 +52,4 @@ export default class Game extends PureComponent<IGame> {
   }
 }
 
-export {GameImage,GameInfoSection,GameInfo,GameTitle,GameYear}
+export { GameImage, GameInfoSection, GameInfo, GameTitle, GameYear };

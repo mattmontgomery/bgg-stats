@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
+import GameDrawer from "./Components/GameDrawer";
+
 import { Collection, Wishlist, ShelfOfShame } from "./Pages/Collection";
 import "./App.scss";
 
@@ -23,6 +25,7 @@ export default class App extends PureComponent {
           <Route path="/" exact component={Collection} />
           <Route path="/wishlist" exact component={Wishlist} />
           <Route path="/shelf-of-shame" exact component={ShelfOfShame} />
+          <GameDrawer />
         </div>
       </Router>
     );
