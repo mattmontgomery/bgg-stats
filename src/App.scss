@@ -120,11 +120,6 @@ body {
       padding: 0.5rem;
       align-items: center;
     }
-    &__background {
-      text-align: center;
-      background-color: $background-color;
-      padding: 0.5rem;
-    }
   }
 }
 
@@ -133,6 +128,12 @@ body {
 
   &__background {
     grid-area: img;
+    text-align: center;
+    background-color: $background-color;
+    padding: 0.5rem;
+    display: grid;
+    justify-content: space-around;
+    align-content: space-around;
   }
   &__info {
     grid-area: info;

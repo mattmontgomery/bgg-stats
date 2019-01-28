@@ -1,5 +1,6 @@
 module.exports = {
   linters: {
-    "**/*.js": "lint"
+    "**/*.js": "yarn lint",
+    "**/*.ts": "yarn tslint"
   }
 };
