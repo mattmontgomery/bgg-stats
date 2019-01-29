@@ -230,6 +230,7 @@ const ConnectedWishlist = connect(
     filters: { hideExpansions },
     drawer
   }) => ({
+    drawer,
     games: sort(
       sortState(games, expansions, hideExpansions)
         .filter(

@@ -4,11 +4,10 @@ This is a project I've written mostly to give myself a bit more experience in
 Typescript. If you've stumbled upon it, you can access a "production" deploy
 of the application: https://agile-thicket-17026.herokuapp.com/
 
-It is important to note that there's no retry functionality currently. The
-API coming back from BoardGameGeek will return a 202 if your data isn't
-compiled, which isn't supported in the application. Also, it's currently
-hardcoded to my username, so that's ... well, it's not useful for you unless
-you build the application. So let's talk about that.
+It is important to note that there's only limited retry functionality currently.
+The API coming back from BoardGameGeek will return a 202 if your data isn't
+compiled, which will trigger up to five retries. If it takes too long for your
+collection to compile on the BGG side, you may have to refresh.
 
 ## Building the application
 
