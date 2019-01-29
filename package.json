@@ -1,6 +1,5 @@
 {
   "name": "bgg-stats",
-  "homepage": "http://mattmontgomery.github.io/games",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

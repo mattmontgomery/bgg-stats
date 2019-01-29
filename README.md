@@ -1,44 +1,40 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# BGG Collection Thingy
 
-## Available Scripts
+This is a project I've written mostly to give myself a bit more experience in
+Typescript. If you've stumbled upon it, you can access a "production" deploy
+of the application: https://agile-thicket-17026.herokuapp.com/
 
-In the project directory, you can run:
+It is important to note that there's no retry functionality currently. The
+API coming back from BoardGameGeek will return a 202 if your data isn't
+compiled, which isn't supported in the application. Also, it's currently
+hardcoded to my username, so that's ... well, it's not useful for you unless
+you build the application. So let's talk about that.
 
-### `npm start`
+## Building the application
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Hopefully it's easy! There are a few things you can do.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- `npm run dev` - This will run a development server. How exciting! It doesn't
+  currently support hot reloading, so the application will reload whenever you
+  make a change. Don't run this in production, because it uses up a bunch of
+  memory.
 
-### `npm test`
+- `npm run start` - This will run a "production" web server, which really just
+  consists of a static file server. It'll serve whatever you've got in the
+  `build/` folder at the root of the project. If you're running this in
+  production, you'll have to build first.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- `npm run build` - This runs Webpack and builds out the application.
 
-### `npm run build`
+## Testing the application
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+There aren't any unit tests yet — who knows if there will be; I'm not sure it's
+the most productive use of my time, but it would be a good chance to write unit
+tests. But there is linting, so you can run that! How exciting. Here are the
+scripts written (as of this writing):
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+- `npm run lint` - Runs eslint
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- `npm run tslint` - Runs tslint for, you know, typescript linting.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `npm run test` - Runs all of the unit tests, of which there are currently none
