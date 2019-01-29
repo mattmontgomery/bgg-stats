@@ -2,6 +2,7 @@ import { IAction } from "../Interfaces";
 
 export const DRAWER_ADD_GAME = "DRAWER_ADD_GAME";
 export const DRAWER_REMOVE_GAME = "DRAWER_REMOVE_GAME";
+export const DRAWER_CLEAR = "DRAWER_CLEAR";
 export const removeGame = (payload: string) => ({
   payload,
   type: DRAWER_REMOVE_GAME
@@ -20,6 +21,8 @@ export default function drawer(
       return state.find(id => id === payload) ? state : [...state, payload];
     case DRAWER_REMOVE_GAME:
       return state.filter(id => id !== payload);
+    case DRAWER_CLEAR:
+      return [];
     default:
       return state;
   }

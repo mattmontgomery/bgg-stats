@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { IAction } from "../Interfaces";
 import parseItems from "../utils/parseItems";
 import drawer from "./drawer";
+import username from "./username";
 
 function defaultSort(a: { name: string }, b: { name: string }): number {
   return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
@@ -95,5 +96,6 @@ export default combineReducers({
   filters,
   games,
   raw,
-  sort
+  sort,
+  username
 });

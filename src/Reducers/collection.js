@@ -1,0 +1,1 @@
+export const COLLECTION_FETCH = "FETCH_COLLECTION";

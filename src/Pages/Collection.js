@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import classnames from "classnames";
 import { addGame } from "../Reducers/drawer";
 import GamesList from "../Components/GamesList";
 import GamesControls from "../Components/GamesControls";
@@ -40,11 +41,6 @@ const dispatchFn = dispatch => ({
 });
 
 class Collection extends PureComponent {
-  componentDidMount() {
-    if (this.props.games.length === 0) {
-      this.props.fetch();
-    }
-  }
   renderList() {
     return (
       <GamesList>
@@ -56,8 +52,16 @@ class Collection extends PureComponent {
           >
             <GameImage />
             <GameTitle>
-              <button className="button--small" onClick={this.props.selectGame}>
-                +
+              <button
+                className={classnames("button--small", {
+                  "button--remove":
+                    this.props.drawer.indexOf(game._objectid) > -1,
+                  "button--add":
+                    this.props.drawer.indexOf(game._objectid) === -1
+                })}
+                onClick={this.props.selectGame}
+              >
+                {this.props.drawer.indexOf(game._objectid) === -1 ? "+" : "X"}
               </button>
             </GameTitle>
             <GameInfoSection>
@@ -124,7 +128,19 @@ class Wishlist extends Collection {
             {...game}
           >
             <GameImage />
-            <GameTitle />
+            <GameTitle>
+              <button
+                className={classnames("button--small", {
+                  "button--remove":
+                    this.props.drawer.indexOf(game._objectid) > -1,
+                  "button--add":
+                    this.props.drawer.indexOf(game._objectid) === -1
+                })}
+                onClick={this.props.selectGame}
+              >
+                {this.props.drawer.indexOf(game._objectid) === -1 ? "+" : "X"}
+              </button>
+            </GameTitle>
             <GameInfoSection>
               <GameInfo
                 field="stats"
@@ -170,27 +186,50 @@ function sortState(games, expansions, hideExpansions = false) {
 }
 
 const ConnectedCollection = connect(
-  ({ games, expansions, sort, filter, filters: { hideExpansions } }) => ({
+  ({
+    games,
+    expansions,
+    sort,
+    filter,
+    filters: { hideExpansions },
+    drawer
+  }) => ({
     games: sort(
       sortState(games, expansions, hideExpansions).filter(g => !!g.status._own)
-    ).filter(filter)
+    ).filter(filter),
+    drawer
   }),
   dispatchFn
 )(Collection);
 
 const ConnectedShelfOfShame = connect(
-  ({ games, expansions, sort, filter, filters: { hideExpansions } }) => ({
+  ({
+    games,
+    expansions,
+    sort,
+    filter,
+    filters: { hideExpansions },
+    drawer
+  }) => ({
     games: sort(
       sortState(games, expansions, hideExpansions).filter(g => !!g.status._own)
     )
       .filter(filter)
-      .filter(({ numplays }) => numplays === 0)
+      .filter(({ numplays }) => numplays === 0),
+    drawer
   }),
   dispatchFn
 )(Collection);
 
 const ConnectedWishlist = connect(
-  ({ games, expansions, sort, filter, filters: { hideExpansions } }) => ({
+  ({
+    games,
+    expansions,
+    sort,
+    filter,
+    filters: { hideExpansions },
+    drawer
+  }) => ({
     games: sort(
       sortState(games, expansions, hideExpansions)
         .filter(
@@ -198,7 +237,8 @@ const ConnectedWishlist = connect(
             !status._own &&
             (status._want || status._wanttobuy || status._wanttoplay)
         )
-        .filter(filter)
+        .filter(filter),
+      drawer
     )
   }),
   dispatchFn

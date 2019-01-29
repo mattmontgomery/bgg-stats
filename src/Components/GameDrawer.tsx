@@ -13,7 +13,7 @@ export interface IGameDrawerProps {
 
 export class GameDrawer extends PureComponent<IGameDrawerProps, IToggleable> {
   public state: IToggleable = {
-    open: true
+    open: false
   };
   public toggleDrawer = () => {
     this.setState({
@@ -36,7 +36,7 @@ export class GameDrawer extends PureComponent<IGameDrawerProps, IToggleable> {
               <Game key={game._collid || idx} {...game}>
                 <GameTitle>
                   <button
-                    className="button--small"
+                    className="button--small button--remove"
                     onClick={this.props.removeGame}
                   >
                     X
@@ -54,9 +54,11 @@ export class GameDrawer extends PureComponent<IGameDrawerProps, IToggleable> {
 
 export default connect(
   ({ drawer, games }: IStoreState) => ({
-    games: drawer.map((id: string) =>
-      games.find(({ _objectid: gameId }: IGame) => id === gameId)
-    )
+    games: drawer
+      .map((id: string) =>
+        games.find(({ _objectid: gameId }: IGame) => id === gameId)
+      )
+      .filter(Boolean)
   }),
   (dispatch: Dispatch<IAction>) => ({
     removeGame: bindActionCreators(removeGame, dispatch)

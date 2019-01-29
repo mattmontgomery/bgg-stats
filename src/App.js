@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 import GameDrawer from "./Components/GameDrawer";
+import UsernamePicker from "./Components/UsernamePicker";
 
 import { Collection, Wishlist, ShelfOfShame } from "./Pages/Collection";
 import "./App.scss";
@@ -11,6 +12,9 @@ export default class App extends PureComponent {
     return (
       <Router>
         <div className="App">
+          <header>
+            <UsernamePicker />
+          </header>
           <nav className="Nav">
             <NavLink activeClassName="selected" exact to="/">
               {"Collection"}
