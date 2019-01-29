@@ -104,7 +104,8 @@
     "build-dev": "webpack --config=./config/webpack.config.dev.js",
     "test": "node scripts/test.js",
     "lint": "jest --config test/jest.lint.js",
-    "tslint": "jest --config test/jest.tslint.js"
+    "tslint": "jest --config test/jest.tslint.js",
+    "postinstall": "node scripts/build.js"
   },
   "browserslist": [
     ">0.2%",
