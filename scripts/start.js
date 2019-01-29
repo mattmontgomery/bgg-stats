@@ -67,13 +67,15 @@ checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
     // We attempt to use the default port but if it is busy, we offer the user to
     // run on a different port. `choosePort()` Promise resolves to the next free port.
-    return choosePort(HOST, DEFAULT_PORT);
+    // return choosePort(HOST, DEFAULT_PORT);
+    return DEFAULT_PORT;
   })
   .then(port => {
     if (port == null) {
       // We have not found a port.
       return;
     }
+    console.log(`Opening on port ${port}`);
     const protocol = process.env.HTTPS === "true" ? "https" : "http";
     const appName = require(paths.appPackageJson).name;
     const urls = prepareUrls(protocol, HOST, port);
@@ -109,6 +111,7 @@ checkBrowsers(paths.appPath, isInteractive)
   })
   .catch(err => {
     if (err && err.message) {
+      console.log(err);
       console.log(err.message);
     }
     process.exit(1);
