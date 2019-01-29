@@ -1,5 +1,6 @@
 {
   "name": "bgg-stats",
+  "homepage": "http://mattmontgomery.github.io/games",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -105,6 +106,8 @@
     "test": "node scripts/test.js",
     "lint": "jest --config test/jest.lint.js",
     "tslint": "jest --config test/jest.tslint.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "postinstall": "node scripts/build.js"
   },
   "browserslist": [
