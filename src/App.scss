@@ -191,7 +191,7 @@ body {
   flex: 4;
   overflow: auto;
   .Games {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     @media (min-width: $wSmall) {
       grid-template-columns: repeat(2, 1fr);
     }

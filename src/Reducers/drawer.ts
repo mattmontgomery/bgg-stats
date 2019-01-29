@@ -1,8 +1,8 @@
 import { IAction } from "../Interfaces";
 
-export const DRAWER_ADD_GAME = "DRAWER_ADD_GAME";
-export const DRAWER_REMOVE_GAME = "DRAWER_REMOVE_GAME";
-export const DRAWER_CLEAR = "DRAWER_CLEAR";
+export const DRAWER_ADD_GAME = "drawer/addGame";
+export const DRAWER_REMOVE_GAME = "drawer/removeGame";
+export const DRAWER_CLEAR = "drawer/clear";
 export const removeGame = (payload: string) => ({
   payload,
   type: DRAWER_REMOVE_GAME

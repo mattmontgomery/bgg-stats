@@ -4,7 +4,7 @@ import { IGame } from "../Interfaces";
 import { connect } from "react-redux";
 
 export interface IGamesFilters {
-  hideExpansions: boolean;
+  hideExpansions?: boolean;
   onFilter: (item: {}) => boolean;
   onToggleFilter: (field: string, value: boolean) => void;
 }
@@ -29,7 +29,7 @@ export class GamesFilters extends PureComponent<IGamesFilters> {
     timeMax: undefined,
     timeMin: undefined,
     yearMax: undefined,
-    yearMin: undefined,
+    yearMin: undefined
   };
   private ref? = createRef<HTMLDivElement>();
   constructor(props: IGamesFilters) {
@@ -42,7 +42,7 @@ export class GamesFilters extends PureComponent<IGamesFilters> {
       timeMax: undefined,
       timeMin: undefined,
       yearMax: undefined,
-      yearMin: undefined,
+      yearMin: undefined
     };
   }
   public filterReset = () => {
@@ -108,16 +108,24 @@ export class GamesFilters extends PureComponent<IGamesFilters> {
   public setNamedFilter = (field: string, value: boolean) => {
     this.props.onToggleFilter(field, value);
   };
-  public setRangeFilterYearMin = (ev: React.FormEvent<HTMLInputElement>) => this.setRangeFilter("yearMin", ev.currentTarget.value)
-  public setRangeFilterYearMax = (ev: React.FormEvent<HTMLInputElement>) => this.setRangeFilter("yearMax", ev.currentTarget.value)
-  public setNumPlayersMin = (ev: React.FormEvent<HTMLInputElement>) => this.setRangeFilter("numPlayersMin", ev.currentTarget.value)
-  public setNumPlayersMax = (ev: React.FormEvent<HTMLInputElement>) => this.setRangeFilter("numPlayersMax", ev.currentTarget.value)
-  public setTimeMin = (ev: React.FormEvent<HTMLInputElement>) => this.setRangeFilter("timeMin", ev.currentTarget.value)
-  public setTimeMax = (ev: React.FormEvent<HTMLInputElement>) => this.setRangeFilter("timeMax", ev.currentTarget.value)
-  public setPlaysMin = (ev: React.FormEvent<HTMLInputElement>) => this.setRangeFilter("playsMin", ev.currentTarget.value)
-  public setPlaysMax = (ev: React.FormEvent<HTMLInputElement>) => this.setRangeFilter("playsMax", ev.currentTarget.value)
+  public setRangeFilterYearMin = (ev: React.FormEvent<HTMLInputElement>) =>
+    this.setRangeFilter("yearMin", ev.currentTarget.value);
+  public setRangeFilterYearMax = (ev: React.FormEvent<HTMLInputElement>) =>
+    this.setRangeFilter("yearMax", ev.currentTarget.value);
+  public setNumPlayersMin = (ev: React.FormEvent<HTMLInputElement>) =>
+    this.setRangeFilter("numPlayersMin", ev.currentTarget.value);
+  public setNumPlayersMax = (ev: React.FormEvent<HTMLInputElement>) =>
+    this.setRangeFilter("numPlayersMax", ev.currentTarget.value);
+  public setTimeMin = (ev: React.FormEvent<HTMLInputElement>) =>
+    this.setRangeFilter("timeMin", ev.currentTarget.value);
+  public setTimeMax = (ev: React.FormEvent<HTMLInputElement>) =>
+    this.setRangeFilter("timeMax", ev.currentTarget.value);
+  public setPlaysMin = (ev: React.FormEvent<HTMLInputElement>) =>
+    this.setRangeFilter("playsMin", ev.currentTarget.value);
+  public setPlaysMax = (ev: React.FormEvent<HTMLInputElement>) =>
+    this.setRangeFilter("playsMax", ev.currentTarget.value);
   public toggleExpansions = (ev: React.FormEvent<HTMLInputElement>) =>
-    this.setNamedFilter("hideExpansions", !!ev.currentTarget.checked)
+    this.setNamedFilter("hideExpansions", !!ev.currentTarget.checked);
 
   public render() {
     return (
@@ -139,39 +147,21 @@ export class GamesFilters extends PureComponent<IGamesFilters> {
         </div>
         <div>
           <label>{"Player Count"}</label>
-          <input
-            onChange={this.setNumPlayersMin}
-            type="number"
-          />
+          <input onChange={this.setNumPlayersMin} type="number" />
           {" — "}
-          <input
-            onChange={this.setNumPlayersMax}
-            type="number"
-          />
+          <input onChange={this.setNumPlayersMax} type="number" />
         </div>
         <div>
           <label>{"Play Time"}</label>
-          <input
-            onChange={this.setTimeMin}
-            type="number"
-          />
+          <input onChange={this.setTimeMin} type="number" />
           {" — "}
-          <input
-            onChange={this.setTimeMax}
-            type="number"
-          />
+          <input onChange={this.setTimeMax} type="number" />
         </div>
         <div>
           <label>{"Plays"}</label>
-          <input
-            onChange={this.setPlaysMin}
-            type="number"
-          />
+          <input onChange={this.setPlaysMin} type="number" />
           {" — "}
-          <input
-            onChange={this.setPlaysMax}
-            type="number"
-          />
+          <input onChange={this.setPlaysMax} type="number" />
         </div>
         <div>
           <label>{"Hide expansions"}</label>

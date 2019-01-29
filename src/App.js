@@ -29,6 +29,13 @@ export default class App extends PureComponent {
           <Route path="/" exact component={Collection} />
           <Route path="/wishlist" exact component={Wishlist} />
           <Route path="/shelf-of-shame" exact component={ShelfOfShame} />
+          <Route path="/:username/collection" exact component={Collection} />
+          <Route path="/:username/wishlist" exact component={Wishlist} />
+          <Route
+            path="/:username/shelf-of-shame"
+            exact
+            component={ShelfOfShame}
+          />
           <GameDrawer />
         </div>
       </Router>

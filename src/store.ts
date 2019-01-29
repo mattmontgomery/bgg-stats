@@ -44,7 +44,10 @@ interface IResult {
   };
 }
 
-const logger = createLogger({});
+const logger = createLogger({
+  collapsed: true,
+  level: "info"
+});
 
 export default () => {
   const createStoreWithMiddleware = applyMiddleware(sagaMiddleware, logger)(
