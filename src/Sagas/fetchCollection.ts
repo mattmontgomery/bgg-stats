@@ -5,6 +5,8 @@ import { call, delay, put, retry, select } from "redux-saga/effects";
 import X2JS from "x2js";
 import { IStoreState } from "../Interfaces";
 
+import { COLLECTION_FETCH_DONE } from "../Reducers/collection";
+
 const MAX_RETRIES: number = 5;
 const RETRY_TIMEOUT: number = 5000;
 
@@ -25,7 +27,7 @@ export default function* fetchCollection() {
     const xml = yield resp.text();
 
     const data = x2js.xml2js(xml);
-    yield put({ type: "FETCH_COLLECTION_DONE", payload: data });
+    yield put({ type: COLLECTION_FETCH_DONE, payload: data });
     const expReq = new Request(
       `${BGG_COLLECTION_JUST_EXPANSIONS_URL}&username=${
         username ? username : "moonty"

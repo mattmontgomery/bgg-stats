@@ -1,1 +1,2 @@
-export const COLLECTION_FETCH = "FETCH_COLLECTION";
+export const COLLECTION_FETCH = "collection/fetch";
+export const COLLECTION_FETCH_DONE = "collection/fetch/done";

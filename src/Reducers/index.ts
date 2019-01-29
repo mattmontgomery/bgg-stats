@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { IAction } from "../Interfaces";
+import { COLLECTION_FETCH_DONE } from "../Reducers/collection";
 import parseItems from "../utils/parseItems";
 import drawer from "./drawer";
 import username from "./username";
@@ -20,7 +21,7 @@ export interface IGame {
 
 function raw(state: IRawState = {}, { type, payload }: IAction): IRawState {
   switch (type) {
-    case "FETCH_COLLECTION_DONE":
+    case COLLECTION_FETCH_DONE:
       return { base: payload };
     case "FETCH_EXPANSIONS_DONE":
       return { exp: payload };
@@ -31,10 +32,8 @@ function raw(state: IRawState = {}, { type, payload }: IAction): IRawState {
 
 function games(state: IGame[] = [], { type, payload }: IAction): IGame[] {
   switch (type) {
-    case "FETCH_COLLECTION_DONE":
+    case COLLECTION_FETCH_DONE:
       return parseItems(payload.items.item);
-    case "FETCH_COLLECTION_LS":
-      return payload;
     default:
       return state;
   }
@@ -81,6 +80,7 @@ function filters(
 ) {
   switch (type) {
     case "TOGGLE_FILTER":
+      console.log(state, payload);
       return { ...state, ...payload };
     case "FILTER_RESET":
       return {};

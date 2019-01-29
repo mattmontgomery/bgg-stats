@@ -30,8 +30,8 @@ const filter = (filterFn: () => void) => ({
   payload: filterFn,
   type: "FILTER_COLLECTION"
 });
-const toggleFilter = (payload: boolean) => ({
-  payload,
+const toggleFilter = (filterName: string, value: boolean) => ({
+  payload: { [filterName]: value },
   type: "TOGGLE_FILTER"
 });
 
