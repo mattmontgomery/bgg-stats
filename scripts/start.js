@@ -67,8 +67,7 @@ checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
     // We attempt to use the default port but if it is busy, we offer the user to
     // run on a different port. `choosePort()` Promise resolves to the next free port.
-    // return choosePort(HOST, DEFAULT_PORT);
-    return DEFAULT_PORT;
+    return choosePort(HOST, DEFAULT_PORT);
   })
   .then(port => {
     if (port == null) {

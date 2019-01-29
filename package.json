@@ -96,7 +96,7 @@
     "x2js": "^3.2.3"
   },
   "scripts": {
-    "start": "PORT=80 node scripts/start.js",
+    "start": "PORT=8000 node scripts/start.js",
     "dev": "PORT=3000 node scripts/start.js",
     "build": "node scripts/build.js",
     "build-dev": "webpack --config=./config/webpack.config.dev.js",
