@@ -17,4 +17,9 @@ export default interface IGame {
       stddev: number;
     };
   };
+  status: {
+    _own: boolean;
+    _wanttoplay: boolean;
+    _wanttobuy: boolean;
+  };
 }

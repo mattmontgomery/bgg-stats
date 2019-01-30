@@ -15,6 +15,8 @@ import Game, {
   GameTitle,
   GameYear
 } from "../Components/Game";
+import GamesControls from "../Components/GamesControls";
+import GamesFilters from "../Components/GamesFilters";
 import GamesList from "../Components/GamesList";
 
 import { IAction, IGame, IGames, IStoreState, IUsername } from "../Interfaces";
@@ -85,6 +87,19 @@ export default class Wishlist extends PureComponent<
           </Game>
         ))}
       </GamesList>
+    );
+  }
+
+  public render() {
+    return (
+      <div className="Collection">
+        <GamesControls onSort={this.props.sort} />
+        <GamesFilters
+          onFilter={this.props.filter}
+          onToggleFilter={this.props.toggleFilter}
+        />
+        {this.renderList()}
+      </div>
     );
   }
 }
