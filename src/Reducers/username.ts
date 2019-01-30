@@ -1,6 +1,7 @@
 import { IAction } from "../Interfaces";
 
-export const USERNAME_SET = "USERNAME_SET";
+export const USERNAME_SET = "username/set";
+
 export const changeUsername = (payload: string) => ({
   payload,
   type: USERNAME_SET

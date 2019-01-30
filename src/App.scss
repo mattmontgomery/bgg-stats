@@ -192,6 +192,7 @@ body {
   overflow: auto;
   .Games {
     grid-template-columns: repeat(1, 1fr);
+    grid-gap: 1rem;
     @media (min-width: $wSmall) {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -203,7 +204,6 @@ body {
     }
   }
   .Game {
-    margin: 1rem;
     border: 1px solid $cBackground;
     word-break: break-word;
     grid-template-columns: 1fr 2fr auto;

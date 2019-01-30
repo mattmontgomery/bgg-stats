@@ -8,7 +8,7 @@ import GamesList from "./GamesList";
 
 export interface IGameDrawerProps {
   games: IGame[];
-  removeGame: () => void;
+  removeGame?: () => void;
 }
 
 export class GameDrawer extends PureComponent<IGameDrawerProps, IToggleable> {
