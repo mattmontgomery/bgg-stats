@@ -8,13 +8,13 @@ import { IStoreState } from "../Interfaces";
 import { EXPANSIONS_FETCH_DONE } from "../Reducers/expansions";
 import { COLLECTION_FETCH_DONE } from "../Reducers/games";
 
+import {
+  BGG_COLLECTION_JUST_EXPANSIONS_URL,
+  BGG_COLLECTION_URL
+} from "../Constants/Urls";
+
 const MAX_RETRIES: number = 5;
 const RETRY_TIMEOUT: number = 5000;
-
-const BGG_COLLECTION_URL: string =
-  "https://www.boardgamegeek.com/xmlapi2/collection?stats=1&version=1&excludesubtype=boardgameexpansion";
-const BGG_COLLECTION_JUST_EXPANSIONS_URL: string =
-  "https://www.boardgamegeek.com/xmlapi2/collection?stats=1&version=1&subtype=boardgameexpansion";
 
 export default function* fetchCollection() {
   try {

@@ -1,7 +1,6 @@
 import { combineReducers } from "redux";
 import { IAction } from "../Interfaces";
 import { COLLECTION_FETCH_DONE } from "../Reducers/games";
-import parseItems from "../utils/parseItems";
 import drawer from "./drawer";
 import expansions from "./expansions";
 import games from "./games";
