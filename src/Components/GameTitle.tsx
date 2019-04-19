@@ -16,8 +16,8 @@ export default class GameTitle extends PureComponent<IGame> {
         </a>
         <div className="Game__title-controls">
           {React.Children.map(
-            this.props.children,
-            (child: React.ReactNode): React.ReactNode => {
+            this.props.children as React.ReactChild[],
+            (child: React.ReactChild): React.ReactChild => {
               if (React.isValidElement(child)) {
                 const childProps: { onClick?: () => void } =
                   typeof child.props === "object" && child.props
@@ -32,6 +32,7 @@ export default class GameTitle extends PureComponent<IGame> {
                       : null
                 });
               }
+              return child;
             }
           )}
         </div>

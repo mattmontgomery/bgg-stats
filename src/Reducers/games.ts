@@ -4,6 +4,11 @@ export const COLLECTION_FETCH_DONE = "games/fetch/done";
 import { IAction, IGame } from "../Interfaces";
 import parseItems from "../utils/parseItems";
 
+export const loadGames = (username: string) => ({
+  payload: username,
+  type: COLLECTION_FETCH
+});
+
 export default function games(
   state: IGame[] = [],
   { type, payload }: IAction

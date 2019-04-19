@@ -22,11 +22,11 @@ import Wishlist from "./Wishlist";
 
 import { IAction, IGame, IGames, IStoreState, IUsername } from "../Interfaces";
 
-const sort = (sortFn: () => void) => ({
+const sortAction = (sortFn: () => void) => ({
   payload: sortFn,
   type: "SORT_COLLECTION"
 });
-const filter = (filterFn: () => void) => ({
+const filterAction = (filterFn: () => void) => ({
   payload: filterFn,
   type: "FILTER_COLLECTION"
 });
@@ -37,9 +37,9 @@ const toggleFilter = (filterName: string, value: boolean) => ({
 
 const dispatchFn = (dispatch: Dispatch<IAction>) => ({
   changeUsername: bindActionCreators(changeUsername, dispatch),
-  filter: bindActionCreators(filter, dispatch),
+  filter: bindActionCreators(filterAction, dispatch),
   selectGame: bindActionCreators(addGame, dispatch),
-  sort: bindActionCreators(sort, dispatch),
+  sort: bindActionCreators(sortAction, dispatch),
   toggleFilter: bindActionCreators(toggleFilter, dispatch)
 });
 
@@ -55,7 +55,9 @@ class Collection extends PureComponent<
   RouteComponentProps<IUsername> & IDispatchProps & IGames
 > {
   public componentDidMount() {
-    if (
+    if (this.props.games.length === 0) {
+      this.props.changeUsername(this.props.username);
+    } else if (
       this.props.match &&
       this.props.match.params &&
       this.props.match.params.username &&
@@ -171,11 +173,11 @@ const ConnectedCollection = connect(
     sort,
     username
   }: IStoreState) => ({
-    username,
+    drawer,
     games: sort(
       sortState(games, expansions, hideExpansions).filter(g => !!g.status._own)
     ).filter(filter),
-    drawer
+    username
   }),
   dispatchFn
 )(Collection);

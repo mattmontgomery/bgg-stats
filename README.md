@@ -36,4 +36,6 @@ scripts written (as of this writing):
 
 - `npm run tslint` - Runs tslint for, you know, typescript linting.
 
+- `npm run pretty` - Runs prettier
+
 - `npm run test` - Runs all of the unit tests, of which there are currently none

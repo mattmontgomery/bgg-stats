@@ -6,11 +6,11 @@ export default class GameInfoSection extends PureComponent<IGame> {
   public render() {
     return (
       <div className="Game__info">
-        {React.Children.map(this.props.children, (child: React.ReactChild) => {
+        {React.Children.map(this.props.children as React.ReactChild[], (child: React.ReactChild) => {
           if (React.isValidElement(child)) {
             const type: string | undefined =
               typeof child.type === "function"
-                ? child.type.displayName
+                ? child.type.name
                 : child.type;
             return React.cloneElement(child as React.ReactElement<any>, {
               ...(() => {
@@ -25,6 +25,7 @@ export default class GameInfoSection extends PureComponent<IGame> {
               })()
             });
           }
+          return child;
         })}
       </div>
     );

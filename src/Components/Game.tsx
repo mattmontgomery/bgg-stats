@@ -13,8 +13,12 @@ export interface IGameInfoProps {
   render: (props: {}) => React.ReactNode;
 }
 
-export default class Game extends PureComponent<IGame> {
-  public renderChild = (child: React.ReactNode): React.ReactNode => {
+interface IHasChildren {
+  children: React.ReactChild[]
+}
+
+export default class Game extends PureComponent<IGame & IHasChildren> {
+  public renderChild = (child: React.ReactChild): React.ReactChild => {
     if (React.isValidElement(child)) {
       return React.cloneElement(child as React.ReactElement<any>, {
         name: this.props.name,
@@ -42,11 +46,12 @@ export default class Game extends PureComponent<IGame> {
         ...child.props
       });
     }
+    return child;
   };
   public render() {
     return (
       <div className="Game">
-        {React.Children.map(this.props.children, this.renderChild)}
+        {React.Children.map(this.props.children as React.ReactChild[], this.renderChild)}
       </div>
     );
   }

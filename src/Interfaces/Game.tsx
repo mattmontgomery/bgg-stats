@@ -1,5 +1,4 @@
 export default interface IGame {
-  children?: React.ReactNode;
   _objectid: number;
   id: number;
   name: string;
