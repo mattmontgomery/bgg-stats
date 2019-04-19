@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import { IGame } from "../Interfaces";
 
 export default class GameTitle extends PureComponent<IGame> {
-  public static displayName = "GameTitle";
   public render() {
     return (
       <div className="Game__title">

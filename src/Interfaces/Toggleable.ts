@@ -1,4 +1,4 @@
 export default interface IToggleable {
   open: boolean;
-  toggle?: (state: boolean) => void;
+  toggle: (state: boolean) => void;
 }

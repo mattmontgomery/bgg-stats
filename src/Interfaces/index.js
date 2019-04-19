@@ -1,4 +1,4 @@
-export { IGame } from "./Game";
+export { IGame, IGameId, IGameTitle } from "./Game";
 export { IGames } from "./Games";
 export { IGameInfoProps } from "./GameInfoProps";
 export { IStoreState } from "./StoreState";
