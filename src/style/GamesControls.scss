@@ -1,0 +1,29 @@
+@import "./config.scss";
+
+.Controls {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-column-gap: 1rem;
+  color: $cPrimary;
+  text-align: center;
+  &--with-label {
+    grid-template-columns: auto repeat(6, 1fr);
+  }
+  input {
+    width: 3rem;
+  }
+  button,
+  label {
+    display: block;
+    width: 100%;
+  }
+  label {
+    font-size: 10pt;
+    font-weight: bold;
+    text-align: center;
+    color: darken($cSecondary, 25%);
+    margin-bottom: 0.25rem;
+    align-self: center;
+  }
+}

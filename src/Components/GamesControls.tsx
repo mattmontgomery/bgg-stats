@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import "../style/GamesControls.scss";
 
 const standardSort = (
   items: Array<{
@@ -47,7 +48,8 @@ export default class GamesControls extends PureComponent<IControlsProps> {
     );
   public render() {
     return (
-      <div className="Controls">
+      <div className="Controls Controls--with-label">
+        <label>{"Sort: "}</label>
         <button onClick={this.standardSort}>{"A-Z"}</button>
         <button onClick={this.reverseSort}>{"Z-A"}</button>
         <button onClick={this.sortByPlays}>{"By plays"}</button>

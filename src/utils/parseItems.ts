@@ -20,6 +20,7 @@ export interface IRawGameStats {
   rating: IRawGameRating;
 }
 export interface IRawGameStatus {
+  [key: string]: string;
   _own: string;
   _wanttobuy: string;
   _wanttoown: string;
@@ -57,10 +58,13 @@ function ratingsReducer(acc: { [index: string]: IValue }, key: string): {} {
 function statusReducer(
   acc: { [index: string]: string },
   item: [string, string]
-) {
+): IGame.Status {
   const value = item[1] === "1";
   return {
     ...acc,
+    _own: acc._own,
+    _wanttobuy: acc._wanttobuy,
+    _wanttoown: acc._wanttoown,
     [item[0]]: value
   };
 }

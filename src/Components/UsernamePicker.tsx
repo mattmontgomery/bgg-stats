@@ -15,9 +15,9 @@ export class UsernamePicker extends PureComponent<IUsername, IUsername> {
       username: props.username
     };
   }
-  public componentWillReceiveProps(nextProps: IUsername) {
-    if (nextProps.username !== this.props.username) {
-      this.updateUsernameInState(null, nextProps.username);
+  public componentDidUpdate(prevProps: IUsername) {
+    if (prevProps.username !== this.props.username) {
+      this.updateUsernameInState(null, this.props.username);
     }
   }
   public changeUsername = (event: React.FormEvent<HTMLFormElement>) => {
@@ -61,11 +61,10 @@ export class UsernamePicker extends PureComponent<IUsername, IUsername> {
 const connectStateToProps = ({ username }: IUsername) => ({
   username
 });
-const connectDispatchToProps = (dispatch: Dispatch<IAction>) => ({
-  changeUsername: bindActionCreators(changeUsername, dispatch)
-});
 
 export default connect(
   connectStateToProps,
-  connectDispatchToProps
+  dispatch => ({
+    changeUsername: bindActionCreators(changeUsername, dispatch)
+  })
 )(withRouter(UsernamePicker));

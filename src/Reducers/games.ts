@@ -1,5 +1,6 @@
 export const COLLECTION_FETCH = "games/fetch";
 export const COLLECTION_FETCH_DONE = "games/fetch/done";
+export const COLLECTION_FETCH_PARSED_DONE = "games/fetch/parse/done";
 
 import { IAction, IGame } from "../Interfaces";
 import parseItems from "../utils/parseItems";

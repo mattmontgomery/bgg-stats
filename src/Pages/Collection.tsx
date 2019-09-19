@@ -5,7 +5,7 @@ import { bindActionCreators, Dispatch } from "redux";
 
 import classnames from "classnames";
 
-import { addGame } from "../Reducers/drawer";
+import { addGame, removeGame } from "../Reducers/drawer";
 import { changeUsername } from "../Reducers/username";
 
 import Game, {
@@ -35,10 +35,11 @@ const toggleFilter = (filterName: string, value: boolean) => ({
   type: "TOGGLE_FILTER"
 });
 
-const dispatchFn = (dispatch: Dispatch<IAction>) => ({
+const dispatchFn = (dispatch: any) => ({
   changeUsername: bindActionCreators(changeUsername, dispatch),
   filter: bindActionCreators(filterAction, dispatch),
-  selectGame: bindActionCreators(addGame, dispatch),
+  addGame: bindActionCreators(addGame, dispatch),
+  removeGame: bindActionCreators(removeGame, dispatch),
   sort: bindActionCreators(sortAction, dispatch),
   toggleFilter: bindActionCreators(toggleFilter, dispatch)
 });
@@ -103,7 +104,11 @@ class Collection extends PureComponent<
                   "button--remove":
                     this.props.drawer.indexOf(game._objectid) > -1
                 })}
-                onClick={this.props.selectGame}
+                onClick={
+                  this.props.drawer.indexOf(game._objectid) === -1
+                    ? this.props.addGame
+                    : this.props.removeGame
+                }
               >
                 {this.props.drawer.indexOf(game._objectid) === -1 ? "+" : "X"}
               </button>

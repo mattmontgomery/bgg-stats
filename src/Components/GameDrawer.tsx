@@ -1,7 +1,7 @@
 import React, { PureComponent, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
-import { IAction, IGame, IStoreState, IToggleable } from "../Interfaces";
+import { IGame, IStoreState, IToggleable } from "../Interfaces";
 import { removeGame } from "../Reducers/drawer";
 import Game, { GameImage, GameTitle } from "./Game";
 import GamesList from "./GamesList";
@@ -55,7 +55,7 @@ export default WithToggle(
         )
         .filter(Boolean)
     }),
-    (dispatch: Dispatch<IAction>) => ({
+    dispatch => ({
       removeGame: bindActionCreators(removeGame, dispatch)
     })
   )(GameDrawer)

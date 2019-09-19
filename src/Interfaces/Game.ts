@@ -1,3 +1,5 @@
+import IGameStatus from "./GameStatus";
+
 export default interface IGame {
   _objectid: number;
   id: number;
@@ -16,9 +18,5 @@ export default interface IGame {
       stddev: number;
     };
   };
-  status: {
-    _own: boolean;
-    _wanttoplay: boolean;
-    _wanttobuy: boolean;
-  };
+  status: IGameStatus;
 }

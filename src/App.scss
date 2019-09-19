@@ -1,13 +1,5 @@
-$cBackground: RGBA(0, 0, 0, 0.125);
-$cBackground-dark: RGBA(0, 0, 0, 0.25);
-$cBackground-darker: RGBA(0, 0, 0, 0.625);
-$cPrimary: #9555af;
-$cPrimaryAccent: lighten($cPrimary, 30%);
-$cSecondary: #6faf55;
-$cAlert: #af556f;
-$wSmall: 950px;
-$wMedium: 1050px;
-$wLarge: 1600px;
+@import "./style/config.scss";
+
 a {
   text-decoration: none;
   color: $cPrimary;
@@ -95,6 +87,11 @@ body {
   flex: auto;
   padding: 1rem;
   grid-row-gap: 1rem;
+  grid-template-rows: auto 1fr;
+  overflow: auto;
+  border-top: 1px solid $cSecondary;
+  max-width: 100%;
+
   .Games {
     display: grid;
     grid-template-columns: repeat(3, auto);
@@ -122,9 +119,6 @@ body {
       display: none;
     }
   }
-  overflow: auto;
-  border-top: 1px solid $cSecondary;
-  max-width: 100%;
   &__toggle {
     background-color: $cSecondary;
     color: white;
@@ -283,37 +277,16 @@ body {
   display: grid;
 }
 
-.Controls {
-  padding: 1rem;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-column-gap: 1rem;
-  color: $cPrimary;
-  text-align: center;
-  input {
-    width: 3rem;
-  }
-  div {
-    display: block;
-    button,
-    label {
-      display: block;
-      width: 100%;
-    }
-    label {
-      font-size: 10pt;
-      font-weight: bold;
-      text-align: center;
-      color: darken($cSecondary, 25%);
-      margin-bottom: 0.25rem;
-    }
-  }
-}
 .Filters {
-  color: $cSecondary;
   button {
     background-color: $cSecondary;
     border-color: $cSecondary;
+    &:hover,
+    &:focus {
+      color: $cSecondary;
+      background-color: transparent;
+      border-color: $cSecondary;
+    }
   }
 }
 .UsernamePicker {
