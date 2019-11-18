@@ -21,7 +21,7 @@ env:
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
   GITHUB_SHA: ${{ github.sha }}
   GKE_ZONE: us-west1-a
-  GKE_CLUSTER: standard-cluster-1
+  GKE_CLUSTER: bgg-stats-2
   IMAGE: bgg-stats
 
 jobs:
