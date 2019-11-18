@@ -22,6 +22,7 @@ env:
   GITHUB_SHA: ${{ github.sha }}
   GKE_ZONE: us-west1-a
   GKE_CLUSTER: bgg-stats-2
+  GKE_DEPLOYMENT: bgg-stats
   IMAGE: bgg-stats
   CLOUDSDK_PYTHON_SITEPACKAGES: 1 
 
@@ -71,5 +72,5 @@ jobs:
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
         ./kustomize edit set image gcr.io/$GKE_PROJECT/$IMAGE:${GITHUB_SHA}
         ./kustomize build . | kubectl apply -f -
-        kubectl rollout status deployment/gke-test
+        kubectl rollout status deployment/${GKE_DEPLOYMENT}
         kubectl get services -o wide
