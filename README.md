@@ -39,3 +39,7 @@ scripts written (as of this writing):
 - `npm run pretty` - Runs prettier
 
 - `npm run test` - Runs all of the unit tests, of which there are currently none
+
+## Deployment
+
+Releases will trigger a new build in GKE. You can see this in the Actions section.
