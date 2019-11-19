@@ -22,7 +22,7 @@ env:
   GITHUB_SHA: ${{ github.sha }}
   GKE_ZONE: us-west1-a
   GKE_CLUSTER: bgg-stats-2
-  GKE_DEPLOYMENT: bgg-stats
+  GKE_DEPLOYMENT: web
   IMAGE: bgg-stats
   CLOUDSDK_PYTHON_SITEPACKAGES: 1 
 
