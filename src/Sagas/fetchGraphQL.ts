@@ -1,11 +1,11 @@
 // tslint:disable:no-submodule-imports
 // tslint:disable:no-console
 
-import { call, delay, put, retry, select } from "redux-saga/effects";
+import { call, put, select } from "redux-saga/effects";
 import { IStoreState } from "../Interfaces";
 
-import ApolloClient from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
+import ApolloClient from "apollo-client";
 import { createHttpLink } from "apollo-link-http";
 
 import gql from "graphql-tag";
@@ -22,8 +22,8 @@ export default function* fetchGraphQL() {
   try {
     const username = yield select((state: IStoreState) => state.username);
     const client = new ApolloClient({
-      link: createHttpLink({ uri: "http://localhost:4000/graphql" }),
-      cache: new InMemoryCache()
+      cache: new InMemoryCache(),
+      link: createHttpLink({ uri: "http://localhost:4000/graphql" })
     });
     const games = yield call(makeQuery, client, username);
     yield put({ type: COLLECTION_FETCH_PARSED_DONE, payload: games });
