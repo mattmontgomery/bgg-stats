@@ -10,7 +10,7 @@
 
 name: Build and Deploy to GKE
 
-on: 
+on:
   release:
     types: [published]
 
@@ -22,8 +22,8 @@ env:
   GKE_ZONE: us-west1-a
   GKE_CLUSTER: bgg-stats-2
   GKE_DEPLOYMENT: web
-    IMAGE: bgg-stats
-    CLOUDSDK_PYTHON_SITEPACKAGES: 1
+  IMAGE: bgg-stats
+  CLOUDSDK_PYTHON_SITEPACKAGES: 1
 
 jobs:
   setup-build-publish-deploy:
