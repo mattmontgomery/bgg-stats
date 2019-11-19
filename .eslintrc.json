@@ -5,9 +5,9 @@
     "es6": true,
     "jest/globals": true
   },
-  "plugins": ["react", "babel", "jest"],
+  "plugins": ["react", "babel", "jest", "@typescript-eslint"],
   "extends": ["prettier", "prettier/react"],
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
