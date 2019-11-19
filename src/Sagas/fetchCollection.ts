@@ -8,10 +8,7 @@ import { IStoreState } from "../Interfaces";
 import { EXPANSIONS_FETCH_DONE } from "../Reducers/expansions";
 import { COLLECTION_FETCH_DONE } from "../Reducers/games";
 
-import {
-  BGG_COLLECTION_JUST_EXPANSIONS_URL,
-  BGG_COLLECTION_URL
-} from "../Constants/Urls";
+import { BGG_COLLECTION_JUST_EXPANSIONS_URL, BGG_COLLECTION_URL } from "../Constants/Urls";
 
 const MAX_RETRIES: number = 5;
 const RETRY_TIMEOUT: number = 5000;
@@ -19,6 +16,9 @@ const RETRY_TIMEOUT: number = 5000;
 export default function* fetchCollection() {
   try {
     const username = yield select((state: IStoreState) => state.username);
+    if (!username) {
+      return;
+    }
     const x2js = new X2JS();
     const req = new Request(`${BGG_COLLECTION_URL}&username=${username}`);
     const resp = yield retry(MAX_RETRIES, RETRY_TIMEOUT, makeRequest, req);
@@ -29,17 +29,8 @@ export default function* fetchCollection() {
 
     const data = x2js.xml2js(xml);
     yield put({ type: COLLECTION_FETCH_DONE, payload: data });
-    const expReq = new Request(
-      `${BGG_COLLECTION_JUST_EXPANSIONS_URL}&username=${
-        username ? username : "moonty"
-      }`
-    );
-    const expResp = yield retry(
-      MAX_RETRIES,
-      RETRY_TIMEOUT,
-      makeRequest,
-      expReq
-    );
+    const expReq = new Request(`${BGG_COLLECTION_JUST_EXPANSIONS_URL}&username=${username ? username : "moonty"}`);
+    const expResp = yield retry(MAX_RETRIES, RETRY_TIMEOUT, makeRequest, expReq);
     if (!expResp.ok) {
       throw expResp.statusText;
     }

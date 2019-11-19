@@ -1,0 +1,12 @@
+name: Run unit tests
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - run: npm install
+      - run: npm run lint
+      - run: npm run tslint
